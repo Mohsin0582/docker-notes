@@ -1,0 +1,12 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+temp/
+
+# Ignore everything in the build directory except for .gitkeep
+build/*
+!build/.gitkeep

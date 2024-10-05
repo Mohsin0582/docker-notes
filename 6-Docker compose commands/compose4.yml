@@ -1,0 +1,38 @@
+# This file is linked with Dockerfile and .env.txt
+services:
+  web:
+    build:
+     context: .
+     dockerfile: Dockerfile
+     args:
+      - PYTHON_VERSION=3.4-alpine    
+      # - PYTHON_VERSION=${PYTHON_VERSION} 
+    image: python-redis-2
+    # environment:
+    #  - Name=Mohsin
+    #  - Add=Rajasthan
+    env_file:
+      - .env.txt
+    ports:
+      - "5000:5000"  # Map port 5000 on the host to port 80 on the container
+  redis:
+    image: ${REDIS_IMAGE}
+    restart: always # Always restart the container if container goes down
+    volumes: 
+     - myredisdata:/data
+    networks:
+     - appnetwork
+
+  redis2:
+    image: ${REDIS_IMAGE}
+    volumes: 
+     - myredisdata:/data
+    networks:
+     - appnetwork2
+
+networks:
+  appnetwork:
+  appnetwork2:
+
+volumes:
+  myredisdata:

@@ -1,0 +1,25 @@
+services:
+  wordpress:
+    image: wordpress:latest  # Use Wordpress
+    ports:
+      - "8080:80"  # Map port 8080 on the host to port 80 on the container
+    environment:
+      WORDPRESS_DB_HOST: db:3306  # The hostname of the MySQL database service
+      WORDPRESS_DB_USER: example_user
+      WORDPRESS_DB_PASSWORD: example_password
+      WORDPRESS_DB_NAME: example_db
+    depends_on:
+      - db  # Ensure db service is started before wordpress
+
+  db:
+    image: mysql:latest  # Use MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password  # Root password for MySQL
+      MYSQL_DATABASE: example_db  # Database name
+      MYSQL_USER: example_user  # User to connect to the database
+      MYSQL_PASSWORD: example_password  # User password
+    volumes:
+      - db_data:/var/lib/mysql  # Persist MySQL data
+
+volumes:
+  db_data:  # Named volume for MySQL data persistence

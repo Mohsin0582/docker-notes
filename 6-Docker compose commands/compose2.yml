@@ -1,0 +1,7 @@
+services:
+  frontend:
+    image: 'httpd:alpine'
+    ports:
+      - "8000:80"  # Map port 8000 on the host to port 80 on the container
+    volumes:
+      - ./ot/:/var/lib/mysql  # Bind mount

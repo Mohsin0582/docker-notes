@@ -1,0 +1,8 @@
+services:
+  frontend:
+    build: .
+    image: 'mohsin0582/pythonimage'
+    ports:
+      - "5000:5000"  # Map port 5000 on the host to port 80 on the container
+  redis:
+    image: 'redis:alpine'
